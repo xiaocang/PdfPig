@@ -391,5 +391,8 @@
             }
             return false;
         }
+
+        /// <inheritdoc/>
+        public int GetCid(int characterCode) => characterCode;
     }
 }

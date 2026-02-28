@@ -399,5 +399,8 @@
             path = GetFontMatrix().Transform(path).ToArray();
             return true;
         }
+
+        /// <inheritdoc/>
+        public int GetCid(int characterCode) => characterCode;
     }
 }

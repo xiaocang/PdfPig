@@ -200,6 +200,9 @@
             return true;
         }
 
+        /// <inheritdoc/>
+        public int GetCid(int characterCode) => characterCode;
+
         public class MetricOverrides
         {
             public int? FirstCharacterCode { get; }

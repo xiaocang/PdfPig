@@ -112,6 +112,24 @@
         public int TextSequence { get; }
 
         /// <summary>
+        /// The raw PDF character code for this letter (before Unicode mapping).
+        /// Exposed for pdf2zh-aligned CID font pipelines.
+        /// </summary>
+        public int CharacterCode { get; }
+
+        /// <summary>
+        /// The text matrix active when this letter was rendered.
+        /// Exposed for pdf2zh-aligned content stream replacement.
+        /// </summary>
+        public TransformationMatrix TextMatrix { get; }
+
+        /// <summary>
+        /// The current transformation matrix (CTM) active when this letter was rendered.
+        /// Exposed for pdf2zh-aligned content stream replacement.
+        /// </summary>
+        public TransformationMatrix CurrentTransformationMatrix { get; }
+
+        /// <summary>
         /// Create a new letter to represent some text drawn by the Tj operator.
         /// </summary>
         public Letter(string value,
@@ -132,6 +150,34 @@
                     width, fontSize, font.Details, font,
                     renderingMode, strokeColor, fillColor,
                     pointSize, textSequence)
+        { }
+
+        /// <summary>
+        /// Create a new letter to represent some text drawn by the Tj operator,
+        /// with additional data for pdf2zh-aligned pipelines (character code, text matrix, CTM).
+        /// </summary>
+        public Letter(string value,
+            PdfRectangle glyphRectangle,
+            PdfRectangle glyphRectangleLoose,
+            PdfPoint startBaseLine,
+            PdfPoint endBaseLine,
+            double width,
+            double fontSize,
+            IFont font,
+            TextRenderingMode renderingMode,
+            IColor strokeColor,
+            IColor fillColor,
+            double pointSize,
+            int textSequence,
+            int characterCode,
+            in TransformationMatrix textMatrix,
+            in TransformationMatrix currentTransformationMatrix) :
+                this(value, glyphRectangle, glyphRectangleLoose,
+                    startBaseLine, endBaseLine,
+                    width, fontSize, font.Details, font,
+                    renderingMode, strokeColor, fillColor,
+                    pointSize, textSequence,
+                    characterCode, textMatrix, currentTransformationMatrix)
         { }
 
         /// <summary>
@@ -170,7 +216,10 @@
             IColor strokeColor,
             IColor fillColor,
             double pointSize,
-            int textSequence)
+            int textSequence,
+            int characterCode = 0,
+            TransformationMatrix textMatrix = default,
+            TransformationMatrix currentTransformationMatrix = default)
         {
             Value = value;
             GlyphRectangle = glyphRectangle;
@@ -194,6 +243,9 @@
             }
             PointSize = pointSize;
             TextSequence = textSequence;
+            CharacterCode = characterCode;
+            TextMatrix = textMatrix;
+            CurrentTransformationMatrix = currentTransformationMatrix;
             TextOrientation = GetTextOrientation();
         }
 

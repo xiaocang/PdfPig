@@ -76,5 +76,14 @@
         /// <param name="characterCode">Character code in a PDF. Not to be confused with unicode.</param>
         /// <param name="path">The normalized glyph path for the given character code.</param>
         bool TryGetNormalisedPath(int characterCode, [NotNullWhen(true)] out IReadOnlyList<PdfSubpath>? path);
+
+        /// <summary>
+        /// Gets the CID (Character Identifier) for the given PDF character code.
+        /// For CID fonts (Type0), this performs a CMap lookup.
+        /// For simple fonts, the CID equals the character code.
+        /// </summary>
+        /// <param name="characterCode">The raw PDF character code.</param>
+        /// <returns>The CID for the character code.</returns>
+        int GetCid(int characterCode);
     }
 }

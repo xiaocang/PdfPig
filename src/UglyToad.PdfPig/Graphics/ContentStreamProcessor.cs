@@ -174,7 +174,10 @@ namespace UglyToad.PdfPig.Graphics
                     currentState.CurrentStrokingColor!,
                     currentState.CurrentNonStrokingColor!,
                     pointSize,
-                    TextSequence);
+                    TextSequence,
+                    code,
+                    textMatrix,
+                    transformationMatrix);
             }
 
             letters.Add(letter);
