@@ -209,5 +209,8 @@
 
             return CidFont.TryGetNormalisedPath(characterIdentifier, out path);
         }
+
+        /// <inheritdoc/>
+        public int GetCid(int characterCode) => CMap.ConvertToCid(characterCode);
     }
 }

@@ -168,5 +168,8 @@ namespace UglyToad.PdfPig.PdfFonts.Simple
         {
             return TryGetPath(characterCode, out path);
         }
+
+        /// <inheritdoc/>
+        public int GetCid(int characterCode) => characterCode;
     }
 }

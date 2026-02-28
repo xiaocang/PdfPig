@@ -148,5 +148,8 @@
         {
             return TryGetPath(characterCode, out path);
         }
+
+        /// <inheritdoc/>
+        public int GetCid(int characterCode) => characterCode;
     }
 }
